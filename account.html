@@ -1,0 +1,16 @@
+<div id="history"><h2>ORDER LOG</h2></div>
+
+<script type="module">
+    import { db, auth } from './firebase-init.js';
+    import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            const q = query(collection(db, "orders"), where("uid", "==", user.uid));
+            const snapshot = await getDocs(q);
+            snapshot.forEach(doc => {
+                document.getElementById('history').innerHTML += `<p>Order ID: ${doc.id} - Status: ${doc.data().status}</p>`;
+            });
+        }
+    });
+</script>
