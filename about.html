@@ -1,27 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>About | Bakery Thrift</title>
     <style>
-        /* Styles and Animation */
-        body { background-color: #f5f3ef; color: #1a1a1a; font-family: 'Georgia', serif; margin: 0; opacity: 0; animation: transitionIn 0.8s forwards; }
-        @keyframes transitionIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Global Animation & Base */
+        @keyframes transitionIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        body { 
+            background-color: #f5f3ef; 
+            color: #1a1a1a; 
+            font-family: 'Georgia', serif; 
+            margin: 0; 
+            opacity: 0; 
+            animation: transitionIn 0.8s ease-out forwards; 
+        }
+
+        .container { max-width: 700px; margin: 0 auto; padding: 150px 40px; text-align: center; }
+        h1 { font-size: 3.5rem; font-weight: 300; margin-bottom: 60px; letter-spacing: -1px; }
+        .text { font-size: 1.2rem; line-height: 2.2; color: #444; }
         
-        .container { max-width: 600px; margin: 0 auto; padding: 120px 40px; text-align: center; }
-        h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
-        .content { line-height: 2; font-size: 1.1rem; color: #333; }
-        .sign-off { margin-top: 50px; font-style: italic; font-size: 1.2rem; }
+        .back-btn { 
+            display: inline-block; 
+            margin-top: 60px; 
+            color: #1a1a1a; 
+            text-transform: uppercase; 
+            font-family: sans-serif; 
+            font-size: 0.7rem; 
+            letter-spacing: 4px; 
+            text-decoration: none; 
+            transition: 0.3s;
+        }
+        .back-btn:hover { opacity: 0.5; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>The Curator</h1>
-        <div class="content">
+        <div class="text">
             <p>Bakery Thrift was founded on a singular belief: that the pieces we wear tell the stories of where we have been.</p>
             <p>Each item in this collection has been meticulously sourced, restored, and curated to capture the unfiltered spirit of the 90s. I look for garments that possess character—the kind of soul that only time can grant.</p>
             <p>Thank you for participating in this archive. Every purchase keeps a piece of that history alive.</p>
         </div>
-        <p class="sign-off">— The Founder</p>
-        <a href="index.html" style="color:#1a1a1a; display:block; margin-top:50px;">&larr; Return to Collection</a>
+        <a href="index.html" class="back-btn">&larr; Return to Collection</a>
     </div>
 </body>
 </html>
