@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Credits | Nexus Web Solutions</title>
     <style>
-        /* Shared Styles */
-        body { background-color: #f5f3ef; color: #1a1a1a; font-family: 'Georgia', serif; margin: 0; animation: fadeIn 1.2s ease-out; }
-        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; pointer-events: none; background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); }
-        .container { max-width: 800px; margin: 0 auto; padding: 80px 40px; text-align: center; }
-        header { border-bottom: 1px solid #1a1a1a; padding-bottom: 40px; margin-bottom: 60px; }
-        h1 { font-size: 3rem; font-weight: 400; margin: 0; }
-        .branding { font-family: sans-serif; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; }
-        .btn { border: 1px solid #1a1a1a; padding: 12px 25px; display: inline-block; text-decoration: none; color: #1a1a1a; font-family: sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 30px; }
-        .btn:hover { background: #1a1a1a; color: #fff; }
+        /* Global Animation & Base */
+        @keyframes transitionIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        body { 
+            background-color: #f5f3ef; 
+            color: #1a1a1a; 
+            font-family: 'Georgia', serif; 
+            margin: 0; 
+            opacity: 0; 
+            animation: transitionIn 0.8s ease-out forwards; 
+        }
+
+        .container { max-width: 700px; margin: 0 auto; padding: 150px 40px; text-align: center; }
+        h1 { font-size: 3.5rem; font-weight: 300; margin-bottom: 30px; letter-spacing: -1px; }
+        .branding-meta { font-family: sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 60px; color: #777; }
+        .text { font-size: 1.1rem; line-height: 2; color: #444; }
+        
+        .back-btn { 
+            display: inline-block; 
+            margin-top: 60px; 
+            color: #1a1a1a; 
+            text-transform: uppercase; 
+            font-family: sans-serif; 
+            font-size: 0.7rem; 
+            letter-spacing: 4px; 
+            text-decoration: none; 
+            transition: 0.3s;
+        }
+        .back-btn:hover { opacity: 0.5; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header><h1>Nexus Web Solutions</h1></header>
-        <div class="branding">
-            <p>ENGINEERED ARCHITECTURE &bull; 2026</p>
-            <p>Bakery Thrift is powered by a custom-engineered stack designed by Nexus Web Solutions. We specialize in high-contrast, performance-focused platforms for premium brands.</p>
+        <h1>Nexus Web Solutions</h1>
+        <div class="branding-meta">ENGINEERED ARCHITECTURE &bull; 2026</div>
+        <div class="text">
+            <p>Bakery Thrift is powered by a custom-engineered stack designed by Nexus Web Solutions.</p>
+            <p>We specialize in high-contrast, performance-focused platforms for modern, premium brands. This site serves as an archive of our commitment to minimalist design and technical precision.</p>
         </div>
-        <a href="index.html" class="btn">Return to Shop</a>
+        <a href="index.html" class="back-btn">&larr; Return to Shop</a>
     </div>
 </body>
 </html>
