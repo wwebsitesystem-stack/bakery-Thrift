@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Admin | Bakery Thrift</title>
     <style>
         body { background-color: #f5f3ef; color: #1a1a1a; font-family: 'Georgia', serif; margin: 0; padding: 40px; }
-        .container { max-width: 500px; margin: 0 auto; padding: 40px; border: 1px solid #1a1a1a; background: #fff; }
-        h1 { font-size: 2rem; margin-bottom: 30px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; }
-        .btn { width: 100%; padding: 12px; background: #1a1a1a; color: #fff; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; }
+        .container { max-width: 500px; margin: 100px auto; padding: 40px; border: 1px solid #1a1a1a; background: #fff; }
+        h1 { font-size: 1.5rem; margin-bottom: 30px; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #e0e0e0; box-sizing: border-box; }
+        .btn { width: 100%; padding: 12px; background: #1a1a1a; color: #fff; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; margin-top: 10px; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
+
+    <!-- Login Section -->
     <div class="container" id="loginArea">
         <h1>Admin Access</h1>
-        <input type="password" id="password" placeholder="Enter Admin Password">
+        <input type="password" id="passwordInput" placeholder="Password">
         <button class="btn" onclick="checkAuth()">Sign In</button>
     </div>
 
+    <!-- Upload Section -->
     <div class="container hidden" id="uploadArea">
         <h1>Add Inventory</h1>
         <input type="text" id="title" placeholder="Product Title">
@@ -31,15 +36,21 @@
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
+        // Logic check: The password must match exactly
         window.checkAuth = () => {
-            if (document.getElementById('password').value === "bakery_thrift") {
+            const pass = document.getElementById('passwordInput').value;
+            if (pass === "bakery_thrift") {
                 document.getElementById('loginArea').classList.add('hidden');
                 document.getElementById('uploadArea').classList.remove('hidden');
-            } else { alert("Access Denied"); }
+            } else {
+                alert("Incorrect password.");
+            }
         };
 
         window.uploadProduct = async () => {
             const file = document.getElementById('image').files[0];
+            if (!file) return alert("Please select an image");
+
             const storageRef = ref(storage, 'products/' + file.name);
             await uploadBytes(storageRef, file);
             const url = await getDownloadURL(storageRef);
@@ -50,7 +61,7 @@
                 checkoutUrl: document.getElementById('sellAppUrl').value,
                 imageUrl: url
             });
-            alert('Product Deployed.');
+            alert('Product Deployed to Store.');
         };
     </script>
 </body>
