@@ -1,0 +1,27 @@
+<form id="uploadForm">
+    <input type="text" id="title" placeholder="Title" required>
+    <input type="number" id="price" placeholder="Price" required>
+    <input type="file" id="image" required>
+    <button type="submit">DEPLOY PRODUCT</button>
+</form>
+
+<script type="module">
+    import { db, storage } from './firebase-init.js';
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+
+    document.getElementById('uploadForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const file = document.getElementById('image').files[0];
+        const storageRef = ref(storage, 'products/' + file.name);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+        
+        await addDoc(collection(db, "products"), {
+            title: document.getElementById('title').value,
+            price: document.getElementById('price').value,
+            imageUrl: url
+        });
+        alert('Item uploaded to inventory.');
+    };
+</script>
