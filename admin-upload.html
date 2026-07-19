@@ -1,9 +1,21 @@
-<form id="uploadForm">
-    <input type="text" id="title" placeholder="Title" required>
-    <input type="number" id="price" placeholder="Price" required>
-    <input type="file" id="image" required>
-    <button type="submit">DEPLOY PRODUCT</button>
-</form>
+<div class="container">
+    <h2>ADD INVENTORY</h2>
+    <form id="uploadForm">
+        <label>Title:</label><br>
+        <input type="text" id="title" required><br><br>
+        
+        <label>Price:</label><br>
+        <input type="number" id="price" required><br><br>
+        
+        <label>Stripe Checkout URL:</label><br>
+        <input type="url" id="checkoutUrl" placeholder="Paste Stripe link here" required><br><br>
+        
+        <label>Image:</label><br>
+        <input type="file" id="image" required><br><br>
+        
+        <button type="submit" class="btn">DEPLOY PRODUCT</button>
+    </form>
+</div>
 
 <script type="module">
     import { db, storage } from './firebase-init.js';
@@ -12,16 +24,23 @@
 
     document.getElementById('uploadForm').onsubmit = async (e) => {
         e.preventDefault();
+        
         const file = document.getElementById('image').files[0];
         const storageRef = ref(storage, 'products/' + file.name);
+        
+        // Upload image
         await uploadBytes(storageRef, file);
         const url = await getDownloadURL(storageRef);
         
+        // Save product details to Firestore
         await addDoc(collection(db, "products"), {
             title: document.getElementById('title').value,
             price: document.getElementById('price').value,
+            checkoutUrl: document.getElementById('checkoutUrl').value,
             imageUrl: url
         });
-        alert('Item uploaded to inventory.');
+        
+        alert('Product successfully added to the shop.');
+        document.getElementById('uploadForm').reset();
     };
 </script>
