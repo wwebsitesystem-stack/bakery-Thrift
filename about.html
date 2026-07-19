@@ -2,25 +2,26 @@
 <html lang="en">
 <head>
     <style>
-        /* Shared Styles */
-        body { background-color: #f5f3ef; color: #1a1a1a; font-family: 'Georgia', serif; margin: 0; animation: fadeIn 1.2s ease-out; }
-        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; pointer-events: none; background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); }
-        .container { max-width: 800px; margin: 0 auto; padding: 80px 40px; text-align: center; }
-        header { border-bottom: 1px solid #1a1a1a; padding-bottom: 40px; margin-bottom: 60px; }
-        h1 { font-size: 3rem; font-weight: 400; margin: 0; }
-        .content { line-height: 1.8; font-size: 1.1rem; }
-        .btn { border: 1px solid #1a1a1a; padding: 12px 25px; display: inline-block; text-decoration: none; color: #1a1a1a; font-family: sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 30px; }
-        .btn:hover { background: #1a1a1a; color: #fff; }
+        /* Styles and Animation */
+        body { background-color: #f5f3ef; color: #1a1a1a; font-family: 'Georgia', serif; margin: 0; opacity: 0; animation: transitionIn 0.8s forwards; }
+        @keyframes transitionIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .container { max-width: 600px; margin: 0 auto; padding: 120px 40px; text-align: center; }
+        h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
+        .content { line-height: 2; font-size: 1.1rem; color: #333; }
+        .sign-off { margin-top: 50px; font-style: italic; font-size: 1.2rem; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header><h1>Bakery Thrift</h1></header>
+        <h1>The Curator</h1>
         <div class="content">
-            <p>Bakery Thrift was born out of a desire to preserve the distinct silhouettes and stories of the 90s. Every piece is hand-selected, cleaned, and cataloged.</p>
-            <p>Our mission is to provide an archive of authentic vintage finds that offer both quality and history. This is not just thrift—this is curated heritage.</p>
+            <p>Bakery Thrift was founded on a singular belief: that the pieces we wear tell the stories of where we have been.</p>
+            <p>Each item in this collection has been meticulously sourced, restored, and curated to capture the unfiltered spirit of the 90s. I look for garments that possess character—the kind of soul that only time can grant.</p>
+            <p>Thank you for participating in this archive. Every purchase keeps a piece of that history alive.</p>
         </div>
-        <a href="index.html" class="btn">Return to Collection</a>
+        <p class="sign-off">— The Founder</p>
+        <a href="index.html" style="color:#1a1a1a; display:block; margin-top:50px;">&larr; Return to Collection</a>
     </div>
 </body>
 </html>
