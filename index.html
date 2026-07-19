@@ -1,90 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Bakery Thrift | Curated Vintage</title>
     <style>
-        /* Base Aesthetic */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        body { 
-            background-color: #f5f3ef; 
-            color: #1a1a1a; 
-            font-family: 'Georgia', serif; 
-            margin: 0; 
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        /* Grain Texture */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.05; pointer-events: none;
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
-
-        /* Masthead */
-        header { border-bottom: 2px solid #1a1a1a; padding-bottom: 40px; margin-bottom: 80px; text-align: center; }
-        h1 { font-size: 5rem; letter-spacing: -3px; font-weight: 300; margin: 0; }
-        .sub-nav { margin-top: 30px; font-family: sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; }
-        .sub-nav a { color: #1a1a1a; text-decoration: none; margin: 0 15px; }
-
-        /* Editorial Grid */
-        .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
-        .product-card { background: #fff; padding: 20px; border: 1px solid #e0e0e0; }
+        @keyframes transitionIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        body { background-color: #f5f3ef; color: #1a1a1a; font-family: 'Georgia', serif; margin: 0; opacity: 0; animation: transitionIn 0.8s ease-out forwards; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 40px; }
         
-        .img-wrap { overflow: hidden; height: 500px; background: #f0f0f0; margin-bottom: 25px; }
+        header { border-bottom: 2px solid #1a1a1a; padding-bottom: 60px; margin-bottom: 80px; text-align: center; }
+        h1 { font-size: 5rem; font-weight: 300; letter-spacing: -3px; margin: 0; }
+        nav { margin-top: 30px; font-family: sans-serif; font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase; }
+        nav a { color: #1a1a1a; text-decoration: none; margin: 0 20px; transition: 0.3s; }
+        nav a:hover { opacity: 0.5; }
+
+        .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; }
+        .product-card { background: #fff; padding: 20px; border: 1px solid #e0e0e0; }
+        .img-wrap { height: 500px; overflow: hidden; background: #eee; margin-bottom: 30px; }
         .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
         .product-card:hover img { transform: scale(1.05); }
-
-        .details h2 { font-size: 1.1rem; font-weight: normal; margin: 0 0 10px 0; }
-        .details p { font-size: 0.8rem; color: #777; margin-bottom: 20px; }
-
-        .btn { border: 1px solid #1a1a1a; padding: 12px 0; width: 100%; display: block; text-align: center; text-decoration: none; color: #1a1a1a; font-family: sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
+        .btn { border: 1px solid #1a1a1a; padding: 15px; width: 100%; display: block; text-align: center; text-decoration: none; color: #1a1a1a; font-family: sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; transition: 0.3s; }
         .btn:hover { background: #1a1a1a; color: #fff; }
-
-        /* Footer */
-        footer { margin-top: 120px; text-align: center; border-top: 1px solid #e0e0e0; padding-top: 40px; }
-        .admin-link { color: #ccc; font-family: sans-serif; font-size: 0.5rem; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Bakery Thrift</h1>
-            <nav class="sub-nav">
-                <a href="index.html">Collection</a>
-                <a href="about.html">About Owner</a>
-                <a href="credits.html">Nexus Web Solutions</a>
-            </nav>
+            <nav><a href="index.html">Collection</a> &bull; <a href="about.html">About</a> &bull; <a href="credits.html">Nexus</a></nav>
         </header>
-
         <div id="grid" class="collection-grid"></div>
-
-        <footer>
-            <a href="admin-upload.html" class="admin-link">Admin</a>
-        </footer>
     </div>
-
     <script type="module">
         import { db } from './firebase-init.js';
         import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        
         const grid = document.getElementById('grid');
         const snap = await getDocs(collection(db, "products"));
-        
         snap.forEach((doc) => {
             const p = doc.data();
-            grid.innerHTML += `
-                <div class="product-card">
-                    <div class="img-wrap"><img src="${p.imageUrl}"></div>
-                    <div class="details">
-                        <h2>${p.title}</h2>
-                        <p>$${p.price}</p>
-                        <a href="${p.checkoutUrl}" class="btn">Add to Bag</a>
-                    </div>
-                </div>`;
+            grid.innerHTML += `<div class="product-card"><div class="img-wrap"><img src="${p.imageUrl}"></div><h2>${p.title}</h2><p>$${p.price}</p><a href="${p.checkoutUrl}" class="btn">Add to Bag</a></div>`;
         });
     </script>
 </body>
