@@ -2,21 +2,41 @@
 <html>
 <head>
     <style>
-        body { background: #c0c0c0; color: #000; font-family: 'Courier New', Courier, monospace; padding: 20px; }
-        .container { width: 800px; margin: 0 auto; background: #fff; border: 2px outset #fff; padding: 20px; }
-        header { border-bottom: 3px double #000; margin-bottom: 20px; text-align: center; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .item { border: 1px solid #000; padding: 10px; background: #eee; }
-        .btn { background: #ccc; border: 2px outset #fff; padding: 5px 10px; cursor: pointer; text-decoration: none; color: #000; }
-        .btn:active { border-style: inset; }
+        /* Classic 90s Web palette: muted, clean, and high-contrast */
+        body { background-color: #669999; color: #000; font-family: Verdana, sans-serif; margin: 0; padding: 20px; }
+        
+        /* Fixed-width 'brochure' container */
+        .page-wrapper { width: 750px; margin: 0 auto; background-color: #ffffff; border: 4px solid #000; padding: 30px; }
+        
+        /* Header area */
+        header { border-bottom: 2px solid #000; margin-bottom: 30px; padding-bottom: 10px; }
+        h1 { margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        
+        /* Item grid with clean boxes */
+        .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .product-box { border: 1px solid #999; padding: 15px; background-color: #fcfcfc; }
+        
+        /* Polished 'classic' buttons */
+        .buy-btn { display: inline-block; background-color: #000; color: #fff; padding: 8px 15px; text-decoration: none; font-weight: bold; border: 2px solid #000; }
+        .buy-btn:hover { background-color: #444; }
+        
+        footer { margin-top: 40px; font-size: 0.8em; text-align: center; border-top: 1px solid #ccc; padding-top: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header><h1>BAKERY THRIFT</h1><p>Classic finds, honest prices.</p></header>
-        <div id="grid" class="grid"></div>
-        <footer style="margin-top:20px; text-align:center;">
-            <a href="about.html">About the Owner</a>
+
+    <div class="page-wrapper">
+        <header>
+            <h1>Bakery Thrift</h1>
+            <p>Quality Goods &mdash; Established 2026</p>
+        </header>
+
+        <div id="grid" class="shop-grid">
+            <!-- Items loaded via JavaScript -->
+        </div>
+
+        <footer>
+            <a href="about.html">About the Owner</a> | <a href="account.html">Order History</a>
         </footer>
     </div>
 
@@ -30,11 +50,11 @@
         querySnapshot.forEach((doc) => {
             const p = doc.data();
             grid.innerHTML += `
-                <div class="item">
-                    <img src="${p.imageUrl}" width="100%">
-                    <h3>${p.title}</h3>
-                    <p>$${p.price}</p>
-                    <a href="${p.checkoutUrl}" class="btn">CHECKOUT</a>
+                <div class="product-box">
+                    <img src="${p.imageUrl}" style="width:100%; border:1px solid #ccc;">
+                    <h3 style="margin: 10px 0;">${p.title}</h3>
+                    <p>Price: $${p.price}</p>
+                    <a href="${p.checkoutUrl}" class="buy-btn" target="_blank">PURCHASE NOW</a>
                 </div>`;
         });
     </script>
