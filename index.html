@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Bakery Thrift | Curated Vintage</title>
     <style>
-        /* Modern 2026 Foundation with 90s "Grain" Overlay */
+        /* 1. Base Styles & Animation */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
         body { 
-            background-color: #f5f3ef; /* Rich, paper-like tone */
+            background-color: #f5f3ef; 
             color: #1a1a1a; 
             font-family: 'Georgia', serif; 
             margin: 0; 
             animation: fadeIn 1.2s ease-out;
         }
 
-        /* Grain Texture Effect */
+        /* 2. Grain Texture Overlay (Analog feel) */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -23,12 +24,20 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
 
-        /* Detailed Header (Organized & Detailed) */
-        header { border-bottom: 1px solid #1a1a1a; padding-bottom: 40px; margin-bottom: 60px; }
+        /* 3. Header & Navigation */
+        header { border-bottom: 1px solid #1a1a1a; padding-bottom: 40px; margin-bottom: 60px; text-align: center; }
         h1 { font-size: 4rem; letter-spacing: -2px; font-weight: 400; margin: 0; }
-        .sub-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-family: sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+        .sub-nav { 
+            margin-top: 25px; 
+            font-family: sans-serif; 
+            font-size: 0.75rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+        }
+        .sub-nav a { color: #1a1a1a; text-decoration: none; margin: 0 10px; }
+        .sub-nav a:hover { text-decoration: underline; }
 
-        /* The 2026/90s Grid */
+        /* 4. Product Grid */
         .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
         .product-card { background: #fff; padding: 15px; border: 1px solid #e0e0e0; transition: 0.4s; }
         .product-card:hover { border: 1px solid #1a1a1a; box-shadow: 10px 10px 0px #e0e0e0; }
@@ -41,7 +50,7 @@
         .details h2 { font-size: 1rem; font-weight: normal; margin: 0; }
         .details p { font-size: 0.85rem; color: #666; margin: 10px 0; }
 
-        /* Modern Detailed Button */
+        /* 5. Minimalist Button */
         .btn { border: 1px solid #1a1a1a; padding: 12px 25px; display: inline-block; text-decoration: none; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
         .btn:hover { background: #1a1a1a; color: #fff; }
     </style>
@@ -51,9 +60,9 @@
         <header>
             <h1>Bakery Thrift</h1>
             <div class="sub-nav">
-                <span>Authentic 90s Vintage</span>
-                <span>CURATED &bull; 2026</span>
-                <a href="about.html" style="color:inherit;">About Owner</a>
+                <a href="index.html">Collection</a> &bull; 
+                <a href="about.html">About Owner</a> &bull; 
+                <a href="credits.html">Nexus Web Solutions</a>
             </div>
         </header>
 
@@ -63,8 +72,10 @@
     <script type="module">
         import { db } from './firebase-init.js';
         import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        
         const grid = document.getElementById('grid');
         const snap = await getDocs(collection(db, "products"));
+        
         snap.forEach((doc) => {
             const p = doc.data();
             grid.innerHTML += `
